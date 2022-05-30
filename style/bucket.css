@@ -1,0 +1,28 @@
+#total_amount {
+  height: 50px;
+  width: 100px;
+  margin: auto;
+  background-color: blueviolet;
+  color: aliceblue;
+}
+
+#bucket {
+  height: auto;
+  width: 80%;
+  margin: auto;
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+#bucket > div {
+  height: 400px;
+  width: 100%;
+  text-align: center;
+  border: 1px solid black;
+}
+#bucket > div > img {
+  width: 90%;
+  height: 60%;
+  padding: 10px;
+}

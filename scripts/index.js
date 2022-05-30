@@ -1,7 +1,7 @@
 // Add the coffee to local storage with key "coffee"
 const url=` https://masai-mock-api.herokuapp.com/coffee/menu`
-
-
+var cartdata = JSON.parse(localStorage.getItem("cartitems")) || []
+//console.log(cartdata)
 async function getdata(){
     try{
     let res=await fetch(url)
@@ -19,33 +19,34 @@ getdata()
 function apendata(data){
 
 let container=document.getElementById("menu")
-data.forEach(function (el){
+data.forEach(function (element){
    let box=document.createElement("div")
 
     let image=document.createElement("img")
-    image.src=el.image
-    image.setAttribute("class","cofyimg")
+    image.src=element.image
+   
     let type=document.createElement("h2")
-     type.innerText=el.title
-     type.setAttribute("class","typlee")
+     type.innerText=element.title
+     
     let price=document.createElement("p")
-    price.innerText=el.price+"$"
-    price.setAttribute("class","coprice")
+    price.innerText=element.price+"$"
+   
     let ading=document.createElement("button")
     ading.innerText="Add to Bucket"
-    ading.setAttribute("id","add_to_bucket")
-    ading.onclick="godata()"
+    ading.addEventListener("click",function(){
+      addToCart(element);
+    })
+    
    box.append(image,type,price,ading)
    container.append(box)
 })
 }
-var arr=[]
-//console.log(arr)
-function godata(){
-  var obj={
-      title:typlee.value,
-      image:cofyimg.value,
-      price:coprice.value
-  }
-  arr.push(obj)
+
+function addToCart(element){
+ // console.log(element)
+  cartdata.push(element)
+     localStorage.setItem("cartitems",JSON.stringify(cartdata))
+    
 }
+let count=document.getElementById("coffee_count")
+count.innerText=cartdata.length
